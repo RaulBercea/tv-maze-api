@@ -1,15 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import SearchPage from "./shared/searchPage";
+import DetailPage from "./shared/detailPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./shared/Login";
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <SearchPage />,
+  },
+  {
+    path: "/shows/:showId",
+    element: <DetailPage />,
+  },
+
+  {
+    path: "/login",
+    element: <Login />,
+  },
+]);
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div>
-      <h1>hello</h1>
-    </div>
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
