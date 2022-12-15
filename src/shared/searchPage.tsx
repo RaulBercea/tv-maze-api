@@ -76,8 +76,10 @@ const SearchPage = () => {
               <InputBase
                 id="outlined-basic"
                 placeholder="Search by title..."
-                onChange={(e) => handleOnSearchChange(e.target.value)}
-                value={currentSearch.get("searh")}
+                onChange={(e) => {
+                  e.preventDefault();
+                  handleOnSearchChange(e.target.value)}}
+                value={currentSearch.get("search") || ""}
                 autoFocus
               />
             </FormControl>
@@ -94,7 +96,10 @@ const SearchPage = () => {
         {shows.map((element, i) => {
           return (
             <Grid item key={i}>
-              <Link to={`/shows/${element.id}`}>
+              <Link
+                style={{ textDecoration: "none" }}
+                to={`/shows/${element.id}`}
+              >
                 <Card style={{ height: "25rem", width: "15rem" }}>
                   <CardActionArea
                     style={{
@@ -117,7 +122,7 @@ const SearchPage = () => {
                       style={{
                         height: "20%",
                         textAlign: "center",
-                        margin: 5,
+                        margin: 5
                       }}
                     >
                       {element.title}
