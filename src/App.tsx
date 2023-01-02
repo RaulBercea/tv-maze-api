@@ -3,6 +3,7 @@ import DetailPage from "./shared/detailPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./shared/Login";
 import SignUp from "./shared/SignUp";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
+  );
 }
 
 export default App;
