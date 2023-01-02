@@ -78,7 +78,8 @@ const SearchPage = () => {
                 placeholder="Search by title..."
                 onChange={(e) => {
                   e.preventDefault();
-                  handleOnSearchChange(e.target.value)}}
+                  handleOnSearchChange(e.target.value);
+                }}
                 value={currentSearch.get("search") || ""}
                 autoFocus
               />
@@ -122,7 +123,7 @@ const SearchPage = () => {
                       style={{
                         height: "20%",
                         textAlign: "center",
-                        margin: 5
+                        margin: 5,
                       }}
                     >
                       {element.title}

@@ -33,7 +33,12 @@ const DetailPage = () => {
   return (
     <>
       <Card
-        sx={{ maxWidth: 600, margin: "auto", display: "flex",marginTop: '7em'  }}
+        sx={{
+          maxWidth: 600,
+          margin: "auto",
+          display: "flex",
+          marginTop: "7em",
+        }}
       >
         <CardMedia
           sx={{ maxWidth: 400 }}
@@ -51,10 +56,19 @@ const DetailPage = () => {
           <Typography gutterBottom variant="h4" color="initial">
             {showDetail?.title}
           </Typography>
-          <Typography sx={{marginBottom: '40px'}} gutterBottom variant="body2" color="initial">
+          <Typography
+            sx={{ marginBottom: "40px" }}
+            gutterBottom
+            variant="body2"
+            color="initial"
+          >
             {showDetail?.summary?.replace(/<[^>]*>/g, "")}
           </Typography>
-          <Typography component="legend" color="text" sx={{fontWeight: 'bold'}}>
+          <Typography
+            component="legend"
+            color="text"
+            sx={{ fontWeight: "bold" }}
+          >
             Rating
           </Typography>
           <Rating

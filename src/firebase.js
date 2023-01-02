@@ -7,11 +7,12 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyCr0cTs97omX4LEw7IPHqURVeapfZjs78I",
   authDomain: "tv-maze-bercea.firebaseapp.com",
-  databaseURL: "https://tv-maze-bercea-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL:
+    "https://tv-maze-bercea-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "tv-maze-bercea",
   storageBucket: "tv-maze-bercea.appspot.com",
   messagingSenderId: "504150651217",
-  appId: "1:504150651217:web:71ddf27c53572d699f2370"
+  appId: "1:504150651217:web:71ddf27c53572d699f2370",
 };
 
 // Initialize Firebase
