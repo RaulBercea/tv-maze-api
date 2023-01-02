@@ -1,8 +1,27 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext.jsx";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { userLogin } = UserAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: Event) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await userLogin(email, password);
+      navigate("/home");
+    } catch (error: any) {
+      setError(error.message);
+      console.log(error.message);
+    }
+  };
+
   return (
     <Paper
       sx={{
@@ -19,26 +38,27 @@ const Login = () => {
       <Typography sx={{ margin: "auto" }} variant="h2" component="h1">
         Login
       </Typography>
-      <Box component="form">
+      <form onSubmit={handleSubmit}>
         <TextField
           sx={{ marginTop: 2 }}
           fullWidth
           required
-          id="outlined-required"
           label="Email"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           sx={{ marginTop: 2 }}
           fullWidth
           required
-          id="outlined-required"
           label="Password"
           type="Password"
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Button sx={{ width: "100%", marginTop: 2 }} variant="contained">
           Login
         </Button>
-      </Box>
+      </form>
       <Typography
         variant="subtitle1"
         sx={{ textAlign: "center", marginTop: 2 }}
