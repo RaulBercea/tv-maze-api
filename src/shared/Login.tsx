@@ -1,4 +1,11 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext.jsx";
@@ -10,7 +17,7 @@ const Login = () => {
   const { userLogin } = UserAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: Event) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
@@ -25,20 +32,20 @@ const Login = () => {
   return (
     <Paper
       sx={{
-        width: 500,
+        maxWidth: 500,
         maxHeight: 500,
         margin: "auto",
-        marginTop: 30,
+        marginTop: 20,
         display: "flex",
         flexDirection: "column",
-        padding: 3,
+        padding: 4,
       }}
       elevation={3}
     >
       <Typography sx={{ margin: "auto" }} variant="h2" component="h1">
         Login
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <form noValidate onSubmit={handleSubmit}>
         <TextField
           sx={{ marginTop: 2 }}
           fullWidth
@@ -55,7 +62,11 @@ const Login = () => {
           type="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button sx={{ width: "100%", marginTop: 2 }} variant="contained">
+        <Button
+          sx={{ width: "100%", marginTop: 2 }}
+          type="submit"
+          variant="contained"
+        >
           Login
         </Button>
       </form>
@@ -63,6 +74,11 @@ const Login = () => {
         variant="subtitle1"
         sx={{ textAlign: "center", marginTop: 2 }}
       >
+        {error && (
+          <Alert sx={{ marginBottom: 2 }} severity="error">
+            {error}
+          </Alert>
+        )}
         Don't have an account?{" "}
         <Link to="/signup">
           <Typography sx={{ fontWeight: "bold" }} variant="button">

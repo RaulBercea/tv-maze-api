@@ -1,9 +1,10 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AuthContextProvider } from "./context/AuthContext";
 import SearchPage from "./shared/searchPage";
 import DetailPage from "./shared/detailPage";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./shared/Login";
 import SignUp from "./shared/SignUp";
-import { AuthContextProvider } from "./context/AuthContext";
+import ProtectedRoute from "./shared/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -12,11 +13,20 @@ const router = createBrowserRouter([
   },
   {
     path: "/shows/:showId",
-    element: <DetailPage />,
+    element: (
+      <ProtectedRoute>
+        <DetailPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/home",
-    element: <SearchPage />,
+    element: (
+      // Making the user unable to go to the search page unless he's loged in
+      <ProtectedRoute>
+        <SearchPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/signup",

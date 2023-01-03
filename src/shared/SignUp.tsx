@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Paper, TextField, Typography } from "@mui/material";
+import { Alert, Button, Paper, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext.jsx";
 
@@ -26,7 +26,7 @@ function SignUp() {
   return (
     <Paper
       sx={{
-        width: 500,
+        maxWidth: 500,
         maxHeight: 500,
         margin: "auto",
         marginTop: 30,
@@ -39,7 +39,7 @@ function SignUp() {
       <Typography sx={{ margin: "auto" }} variant="h2" component="h1">
         Signup
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <form noValidate onSubmit={handleSubmit}>
         <TextField
           sx={{ marginTop: 2 }}
           fullWidth
@@ -67,6 +67,11 @@ function SignUp() {
         variant="subtitle1"
         sx={{ textAlign: "center", marginTop: 2 }}
       >
+        {error && (
+          <Alert sx={{ marginBottom: 2 }} severity="error">
+            {error}
+          </Alert>
+        )}
         Already have an account?{" "}
         <Link to="/">
           <Typography sx={{ fontWeight: "bold" }} variant="button">
