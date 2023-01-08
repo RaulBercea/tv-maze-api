@@ -11,7 +11,7 @@ function SignUp() {
 
   const { createUser } = UserAuth();
 
-  const handleSubmit = async (e: Event) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
@@ -29,10 +29,10 @@ function SignUp() {
         maxWidth: 500,
         maxHeight: 500,
         margin: "auto",
-        marginTop: 30,
+        marginTop: 20,
         display: "flex",
         flexDirection: "column",
-        padding: 3,
+        padding: 4,
       }}
       elevation={3}
     >
