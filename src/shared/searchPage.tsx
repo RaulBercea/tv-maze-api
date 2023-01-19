@@ -56,7 +56,7 @@ const SearchPage = () => {
               alignItems: "center",
               justifyContent: "space-between",
             }}
-            style={{ padding: "1rem", width: "400px", margin: "auto" }}
+            style={{ padding: "1rem", maxWidth: "400px", margin: "auto" }}
             autoComplete="off"
             onSubmit={(e) => {
               e.preventDefault();

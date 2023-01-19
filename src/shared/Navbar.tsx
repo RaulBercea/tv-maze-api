@@ -32,7 +32,7 @@ function Navbar() {
           sx={{ display: "flex", justifyContent: "space-between" }}
           disableGutters
         >
-          <Link to="/home">
+          <Link style={{textDecoration: "none"}} to="/home">
             <Typography
               variant="h6"
               noWrap
