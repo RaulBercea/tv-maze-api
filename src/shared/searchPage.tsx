@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { getShowsBySearch, ShowType } from "../api";
-import ShowCard from './ShowCard'
+import ShowCard from "./ShowCard";
 
 // mui card
 import Card from "@mui/material/Card";
@@ -20,40 +20,24 @@ import { auth } from "../firebase";
 import usesFavourites from "../hooks/usesFavourites";
 
 const SearchPage = () => {
-  const [currentSearch, setCurrentSearch] = useSearchParams();
+  const [currentSearchUrl, setCurrentSearchUrl] = useSearchParams();
   const [shows, setShows] = useState<ShowType[]>([]);
+  const [currentSearch, setCurrentSearch] = useState("");
+  
 
-  const handleOnSearchChange = useCallback(
-    (query: string) => {
-      setCurrentSearch({ search: query });
-    },
-    [setCurrentSearch]
-  );
+  const handleOnSearch = async () => {
+    if(!currentSearchUrl.get("search")){
+      setShows([]);
+      return;
+    }
 
-  /**
-   * Disables the search button if the search query is empty
-   * @returns weather the button is disabled or not
-   */
-  const isSearchButtonDisabled = () =>
-    currentSearch.get("search")?.trim().length === 0;
-
-  const handleOnSearch = useCallback(() => {
-    getShowsBySearch(currentSearch?.get("search") || "").then((res) =>
-      setShows(res)
-    );
-  }, [currentSearch]);
+    const showsRes = await getShowsBySearch(currentSearchUrl.get("search") as string);
+    setShows(showsRes);
+  }
 
   useEffect(() => {
-    const currentSearchStr = currentSearch?.get("search")?.trim();
-    if (
-      !!currentSearchStr &&
-      currentSearchStr.length > 0 &&
-      shows.length === 0
-    ) {
-      handleOnSearch();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleOnSearch]);
+    handleOnSearch();
+  }, [currentSearchUrl]);
 
   return (
     <>
@@ -82,16 +66,15 @@ const SearchPage = () => {
                 placeholder="Search by title..."
                 onChange={(e) => {
                   e.preventDefault();
-                  handleOnSearchChange(e.target.value);
+                  setCurrentSearch(e.target.value);
                 }}
-                value={currentSearch.get("search") || ""}
+                value={currentSearch}
                 autoFocus
               />
             </FormControl>
             <FormControl>
               <Button
-                onClick={handleOnSearch}
-                disabled={isSearchButtonDisabled()}
+                onClick={()=>setCurrentSearchUrl({search:currentSearch})}
               >
                 Search
               </Button>
@@ -101,7 +84,7 @@ const SearchPage = () => {
         {shows.map((element, i) => {
           return (
             <Grid item key={i}>
-              <ShowCard show={element}/>
+              <ShowCard show={element} />
             </Grid>
           );
         })}

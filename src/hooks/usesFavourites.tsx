@@ -9,7 +9,7 @@ const usesFavourites = (favouriteId?: string | number) => {
 
   useEffect(() => {
     const unsubscribe = onValue(
-      ref(database, `users/${user.uid}/favourites/${favouriteId}`),
+      ref(database, `users/${user?.uid}/favourites/${favouriteId}`),
       (snapshot) => {
         const data = snapshot.val();
         setFavourite(!!data);

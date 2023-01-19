@@ -11,7 +11,7 @@ import {
   Grid,
   Rating,
 } from "@mui/material";
-import { UserAuth } from "../context/AuthContext.jsx";
+import { UserAuth } from "../context/AuthContext";
 import { addFavourite, removeFavourite } from "./firebaseRealtimeDB";
 import usesFavourites from "../hooks/usesFavourites";
 import * as Icon from "react-bootstrap-icons";
@@ -71,14 +71,14 @@ const DetailPage = () => {
             style={{
               fontSize: "1.4rem",
             }}
-            onClick={() => removeFavourite(user.uid, showDetail.id)}
+            onClick={() => removeFavourite(user?.uid, showDetail.id)}
           ></Icon.HeartFill>
         ) : (
           <Icon.Heart
             style={{
               fontSize: "1.4rem",
             }}
-            onClick={() => addFavourite(user.uid, showDetail.id)}
+            onClick={() => addFavourite(user?.uid, showDetail.id)}
           ></Icon.Heart>
         )}
           <Typography

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Button, Paper, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext.jsx";
+import { UserAuth } from "../context/AuthContext";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ function SignUp() {
 
   const { createUser } = UserAuth();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     setError("");
     try {

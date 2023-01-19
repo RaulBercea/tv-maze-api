@@ -15,7 +15,7 @@ import { ShowType } from "../api";
 import usesFavourites from "../hooks/usesFavourites";
 import * as Icon from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext.jsx";
+import { UserAuth } from "../context/AuthContext";
 import { addFavourite, removeFavourite } from "./firebaseRealtimeDB";
 
 interface PropTypes {
@@ -49,14 +49,14 @@ function ShowCard({ show }: PropTypes) {
             style={{
               fontSize: "1.4rem",
             }}
-            onClick={() => removeFavourite(user.uid, show.id)}
+            onClick={() => removeFavourite(user?.uid, show.id)}
           ></Icon.HeartFill>
         ) : (
           <Icon.Heart
             style={{
               fontSize: "1.4rem",
             }}
-            onClick={() => addFavourite(user.uid, show.id)}
+            onClick={() => addFavourite(user?.uid, show.id)}
           ></Icon.Heart>
         )}
         <Link style={{ textDecoration: "none" }} to={`/shows/${show.id}`}>
@@ -66,7 +66,7 @@ function ShowCard({ show }: PropTypes) {
             style={{
               height: "20%",
               textAlign: "center",
-              fontSize: "1.5rem",
+              fontSize: "1.2rem",
               margin: 5,
             }}
           >
