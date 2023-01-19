@@ -72,7 +72,7 @@ export type ShowType = {
   
   export const getShowById = async (id: number) => {
     if (id < 0) {
-      return null;
+      return {} as ShowDetailType;
     }
   
     const res = await fetch(`${link}/shows/${id}`);

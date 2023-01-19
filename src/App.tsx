@@ -5,6 +5,7 @@ import DetailPage from "./shared/detailPage";
 import Login from "./shared/Login";
 import SignUp from "./shared/SignUp";
 import ProtectedRoute from "./shared/ProtectedRoute";
+import FavouritesPage from "./shared/FavouritesPage";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/favourites",
+    element: (
+      <ProtectedRoute>
+        <FavouritesPage />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

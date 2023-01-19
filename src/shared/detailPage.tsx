@@ -15,6 +15,7 @@ import { UserAuth } from "../context/AuthContext";
 import { addFavourite, removeFavourite } from "./firebaseRealtimeDB";
 import usesFavourites from "../hooks/usesFavourites";
 import * as Icon from "react-bootstrap-icons";
+import Navbar from "./Navbar";
 
 const DetailPage = () => {
   const { showId } = useParams();
@@ -42,6 +43,7 @@ const DetailPage = () => {
 
   return (
     <>
+    <Navbar/>
       <Card
         sx={{
           maxWidth: 600,

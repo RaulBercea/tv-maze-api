@@ -18,6 +18,7 @@ import Typography from "@mui/material/Typography";
 import { Link, useSearchParams } from "react-router-dom";
 import { auth } from "../firebase";
 import usesFavourites from "../hooks/usesFavourites";
+import Navbar from "./Navbar";
 
 const SearchPage = () => {
   const [currentSearchUrl, setCurrentSearchUrl] = useSearchParams();
@@ -41,6 +42,7 @@ const SearchPage = () => {
 
   return (
     <>
+    <Navbar/>
       <Grid
         container
         spacing={2}
