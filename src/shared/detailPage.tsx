@@ -11,11 +11,17 @@ import {
   Grid,
   Rating,
 } from "@mui/material";
+import { UserAuth } from "../context/AuthContext.jsx";
+import { addFavourite, removeFavourite } from "./firebaseRealtimeDB";
+import usesFavourites from "../hooks/usesFavourites";
+import * as Icon from "react-bootstrap-icons";
 
 const DetailPage = () => {
   const { showId } = useParams();
   const [showDetail, setShowDetail] = useState<ShowDetailType | null>(null);
   const navigate = useNavigate();
+  const isFavourite = usesFavourites(showId);
+  const { user } = UserAuth();
 
   useEffect(() => {
     if (!!showId) {
@@ -29,6 +35,10 @@ const DetailPage = () => {
       }
     }
   }, [showId]);
+
+  if(!showDetail){
+    return null;
+  }
 
   return (
     <>
@@ -56,6 +66,21 @@ const DetailPage = () => {
           <Typography gutterBottom variant="h4" color="initial">
             {showDetail?.title}
           </Typography>
+          {isFavourite ? (
+          <Icon.HeartFill
+            style={{
+              fontSize: "1.4rem",
+            }}
+            onClick={() => removeFavourite(user.uid, showDetail.id)}
+          ></Icon.HeartFill>
+        ) : (
+          <Icon.Heart
+            style={{
+              fontSize: "1.4rem",
+            }}
+            onClick={() => addFavourite(user.uid, showDetail.id)}
+          ></Icon.Heart>
+        )}
           <Typography
             sx={{ marginBottom: "40px" }}
             gutterBottom

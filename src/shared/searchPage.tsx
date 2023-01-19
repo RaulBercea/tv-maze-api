@@ -4,16 +4,20 @@ import {
   FormControl,
   Grid,
   InputBase,
+  Box,
   Paper,
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { getShowsBySearch, ShowType } from "../api";
+import ShowCard from './ShowCard'
 
 // mui card
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Link, useSearchParams } from "react-router-dom";
+import { auth } from "../firebase";
+import usesFavourites from "../hooks/usesFavourites";
 
 const SearchPage = () => {
   const [currentSearch, setCurrentSearch] = useSearchParams();
@@ -97,40 +101,7 @@ const SearchPage = () => {
         {shows.map((element, i) => {
           return (
             <Grid item key={i}>
-              <Link
-                style={{ textDecoration: "none" }}
-                to={`/shows/${element.id}`}
-              >
-                <Card style={{ height: "25rem", width: "15rem" }}>
-                  <CardActionArea
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      image={element.image}
-                      style={{
-                        maxWidth: "100%",
-                        height: "80%",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <Typography
-                      variant="h5"
-                      component="div"
-                      style={{
-                        height: "20%",
-                        textAlign: "center",
-                        margin: 5,
-                      }}
-                    >
-                      {element.title}
-                    </Typography>
-                  </CardActionArea>
-                </Card>
-              </Link>
+              <ShowCard show={element}/>
             </Grid>
           );
         })}
